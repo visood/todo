@@ -7,7 +7,7 @@ var main = function() {
     if ($input_todo.val() !== "") {
 		  $new_todo = $("<li>").text($input_todo.val());
       $new_todo.hide();
-		  $("section.todos ol").append($new_todo);
+		  $("div.todos ol").append($new_todo);
       $new_todo.fadeIn();
     }
 
