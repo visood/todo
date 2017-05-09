@@ -49,7 +49,7 @@ p {
 p.quote {
 		color						: orange;
 		background			: white;
-		width						: 320px;
+		width						: 285px;
 		border					: 1px solid red;
 		padding					: 20px;
 }
@@ -70,20 +70,20 @@ section.todos {
 nav.quote {
 		color						: orange;
 		background			: white;
-		width						: 320;
+		width						: 285px;
 		border					: 1px solid red;
 		padding					: 20px;
 		float : left;
 }
 nav.contact {
 		color						: orange;
-		width						: 320px;
+		width						: 285px;
 		float : left;
 }
 
 nav.sitemap {
 		color						: orange;
-		width						: 320px;
+		width						: 285px;
 		float : right;
 }
 a {
@@ -145,7 +145,7 @@ footer : {
 }
 
 input {
-		width : 200px;
+		width : 285px;
 		margin : 20px;
 		padding : 10px;
 		border : 5px;
