@@ -27,6 +27,28 @@ var main = function() {
     }
 	});
 
+
+  $(".tabs span").toArray().forEach(function (element) {
+    //create a click handler for this element
+    //note that element is a DOM element, use $ to get a jQuery object
+    var $element = $(element);
+    $element.on("click", function() {
+      $(".tabs span").removeClass("active");
+      $element.addClass("active");
+      $("main .todos").empty();
+
+      if ($element.parent().is(":nth-child(1)")) {
+        console.log("FIRST TAB CLICKED!");
+      } else if ($element.parent().is(":nth-child(2)")) {
+        console.log("SECOND TAB CLICKED!");
+      } else if ($element.parent().is(":nth-child(3)")) {
+        console.log("THIRD TAB CLICKED!");
+      }
+      return false;
+    });
+  });
 };
+
+
 
 $(document).ready(main);
