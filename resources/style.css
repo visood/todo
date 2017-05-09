@@ -60,6 +60,13 @@ div.todo {
 		border					: 1px solid red;
 		padding					: 20px;
 }
+
+section.todos {
+		color						: orange;
+		background			: white;
+		border					: 1px solid red;
+		padding					: 20px;
+}
 nav.quote {
 		color						: orange;
 		background			: white;
@@ -128,4 +135,18 @@ ul { /* unordered list */
 footer : {
 		background : gray;
 		clear : both; 
+}
+
+.todos li:nth-child(even) {
+		background : lavender;
+}
+.todos li:nth-child(odd) {
+		background : gainsboro;
+}
+
+input {
+		width : 200px;
+		margin : 20px;
+		padding : 10px;
+		border : 5px;
 }

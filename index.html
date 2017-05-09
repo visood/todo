@@ -8,8 +8,8 @@
 							rel="stylesheet" type="text/css"> 
     </head>
 
-    <body>
-        <header>
+		<body>
+				<header>
 						<div class="container">
 								<h1> Do these, starting now </h1>
 								<nav>
@@ -38,13 +38,16 @@
 										</ul>
 								</nav>
 						</div>
-        </header>
+				</header>
 
+				<main>
+						<section class="todo-input">
+								<br>
+								<p>Add a new TODO</p>
+								<input type ="text"><button>+</button>
+						</section>
 
-        <main>
-						<h1>My TODO LIST</h1>
-
-						<div class="todo">
+	 					<section class="todos">
 								<ol>
 										<li><a href="#">Item a</a></li>
 										<li><a href="#">Item b</a></li>
@@ -53,10 +56,10 @@
 										<li><a href="#">Item e</a></li>
 										<li><a href="#">Item f</a></li>
 								</ol>
-						</div>
+						</section>
 				</main>
 
-        <footer>
+				<footer>
 						<div class="container">
 								<nav class="contact">
 										<h5> Contact Us </h5>
@@ -77,8 +80,8 @@
 										</ol>
 								</nav>
 						</div>
-        </footer>
-
-
-    </body>
+				</footer>
+				<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+				<script src="src/todo.js"></script>
+		</body>
 </html>
