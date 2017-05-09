@@ -16,6 +16,7 @@ var main = function() {
 
 	$(".todo-input button").on("click", function (event) {
 		console.log("Hello World! Whats TODO today?")
+
     addTodoFromInputBox();
 	});
 
