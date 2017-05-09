@@ -2,20 +2,30 @@
 		margin : 0;
 		padding : 0;
 }
+
 body {
-		background			: lightcyan;
-		width						: 800px;
-		margin					: auto;
+		background : #f9e933;
+		width : 855px;
+		margin : auto;
 }
 
-main {
-		width : 800px;
+/* hide the remaining page if width reduced below min value */
+header, main, footer {
+		min-width : 800px;
+		overflow  : auto;
+}
+
+header .container, main .container, footer .container {
+		max-width : 855px;
 		margin : auto;
-		background : beige;
+}
+
+header {
+		background : white;
 }
 
 nav {
-		width : 340px;
+		width : 320px;
 		float : right;
 		margin : 10px;
 }
@@ -34,8 +44,6 @@ h1 {
 
 p {
 		color						: gray;
-		border					: 1px solid gray;
-		padding					: 10px;
 }
 
 p.quote {
@@ -46,6 +54,12 @@ p.quote {
 		padding					: 20px;
 }
 
+div.todo {
+		color						: orange;
+		background			: white;
+		border					: 1px solid red;
+		padding					: 20px;
+}
 nav.quote {
 		color						: orange;
 		background			: white;
@@ -54,7 +68,17 @@ nav.quote {
 		padding					: 20px;
 		float : left;
 }
+nav.contact {
+		color						: orange;
+		width						: 320px;
+		float : left;
+}
 
+nav.sitemap {
+		color						: orange;
+		width						: 320px;
+		float : right;
+}
 a {
 		color						: cornflowerblue;
 }
@@ -69,7 +93,7 @@ a:hover {
 
 ol { /* ordered list */
 		border : 2px solid darksalmon;
-		border-radius : 10px;
+		padding : 2px;
 		background : beige;
 }
 
