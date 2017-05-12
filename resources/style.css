@@ -137,10 +137,10 @@ footer : {
 		clear : both; 
 }
 
-.todos li:nth-child(even) {
+.content li:nth-child(even) {
 		background : lavender;
 }
-.todos li:nth-child(odd) {
+.content li:nth-child(odd) {
 		background : gainsboro;
 }
 

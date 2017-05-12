@@ -1,0 +1,30 @@
+[
+    {
+        "description" : "Get groceries",
+        "tags" : ["shopping", "chores"]
+    },
+    {
+        "description" : "Make up some new ToDos",
+        "tags" : ["writing", "work"]
+    },
+    {
+        "description" : "Apply for jobs",
+        "tags" : ["work", "job-search"]
+    },
+    {
+        "description" : "Review jobs",
+        "tags" : ["learn", "job-search"]
+    },
+    {
+        "description" : "read Mining of Massive Datasets",
+        "tags" : ["learn", "work"]
+    },
+    {
+        "description" : "Meditate",
+        "tags" : ["learn", "improvement", "health"]
+    },
+    {
+        "description" : "Run",
+        "tags" : ["improvement", "health"]
+    }
+]
