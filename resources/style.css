@@ -144,12 +144,20 @@ footer : {
 		background : gainsboro;
 }
 
-input {
+.content input {
 		width : 285px;
 		margin : 20px;
 		padding : 10px;
 		border : 5px;
 }
+
+.content input.tags {
+		width : 285px;
+		margin : 20px;
+		padding : 10px;
+		border : 5px;
+}
+
 
 .tabs a span{
 		display : inline-block;
@@ -163,4 +171,17 @@ input {
 
 .tabs a span.active {
 		background : #eee;
+}
+
+main .content button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    margin: 30px 55px 0px 0px;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+    //float: right;
+    //display: inline-block;
+    font-size: 28px;
 }

@@ -11,6 +11,16 @@ var main = function(todos) {
         return [].concat.apply([], xss);
     };
 
+		var filter = function(f, xs) {
+				var ys = [];
+				xs.forEach(function(x) {
+						if (f(x)) {
+								ys.push(x);
+						}
+				});
+				return ys;
+		} 
+
     // get unique elements -- this can be put in a library
 
     var uniqueElements = function(xs) {
@@ -55,7 +65,7 @@ var main = function(todos) {
             $new_todo.hide();
 		        $("div.todosDescriptionsol").prepend($new_todo);
             $new_todo.fadeIn();
-            todosDescriptionspush($input_todo.val());
+            todosDescriptions.push($input_todo.val());
         }
 
         $input_todo.val("");
@@ -89,7 +99,7 @@ var main = function(todos) {
                     $todoContent.append($("<li>").text(todo));
                 });
                 todosDescriptions.reverse();
-                $("main .content").append($todoContent);
+								$("main .content").append($todoContent);
             } else if ($element.parent().is(":nth-child(2)")) {
                 console.log("SECOND TAB CLICKED!");
                 $todoContent = $("<ol>");
@@ -100,9 +110,10 @@ var main = function(todos) {
             } else if ($element.parent().is(":nth-child(3)")) {
                 console.log("TAGs TAB CLICKED");
                 var $tagContent = $("<ul>");
-            //    todosTags.forEach(function (tag) {
-             //       $tagContent.append($("<li>").text(tag));
-              //  });
+                todosTags.forEach(function (tag) {
+                    $tagContent.append($("<li>").text(tag));
+                });
+								/*
                 organizeByTags(todos).forEach(function (todo) {
                     $tagContent.append($("<li>").text(todo.tag));
                     $tagContent.append($("<li>").text("----------------"));
@@ -111,24 +122,54 @@ var main = function(todos) {
                     });
                     $tagContent.append($("<li>").text("----------------"));
                 });
+								*/
                 $("main .content").append($tagContent);
             } else if ($element.parent().is(":nth-child(4)")) {
                 console.log("ADD TAB CLICKED!");
-                var $input = $("<input class=\"desc\" type=\"text\">")
                 var $mcont = $("main .content");
-                $mcont.append($("<h2>").text("Add a TODO"));
-                $mcont.append($input);
-                var $but = $("<button>").text("+");
+
+                var $descInput = $("<input class=\"desc\" type=\"text\">")
+                $mcont.append($("<h2>").text("Description"));
+                $mcont.append($descInput);
+
+                $mcont.append($("<h2>").text("Tags"));
+                $mcont.append($("<h3>").text("(comma separated)"));
+                var $tagInput = $("<input class=\"tags\" type=\"text\">")
+                $mcont.append($tagInput);
+
+								$mcont.append($("<br>"));
+                var $but = $("<button>").text("Done");
                 $mcont.append($but);
+								$mcont.append($("<br>"));
+								$mcont.append($("<br>"));
+								$mcont.append($("<hr>"));
 
                 $("main .content button").on("click", function (event) {
-                    var d = $("main .todos input.desc").val();
+                    var d = $("main .content input.desc").val();
                     console.log("TODO added " + d);
                     if (d != "") {
-                        todosDescriptions.push(d);
-                        $("main .content input.desc").val("");
+												var ts = filter(
+														function(x) {return x != "";},
+														$("main .content input.tags")
+																.val()
+																.split(",")
+																.map(function(t) { return t.trim();})
+												);
+																				
+												if (ts.length != 0) {
+														console.log("todo tags entered, " + ts.length);
+														todos.push({
+																"description" : todosDescriptions,
+																"tags" : ts
+														});
+														$("main .content input.tags").val("");
+														$("main .content input.desc").val("");
+														window.alert("New TODO: \n" + d + "(" + ts.join() + ")");
+												} else {
+														window.alert("Please enter some tags for the new TODO!");
+												}
                     } else {
-                        window.alert("Please enter a description the new item!");
+                        window.alert("Please enter a description the new TODO!");
                     }
                 });
             }
