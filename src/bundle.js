@@ -151,7 +151,8 @@ var main = function() {
     var model    = require("./model.js");
     var datetime = require("./datetime.js");
 
-    var todos = data.todos;
+    //var todos = data.todos;
+    var todos = $.get("/todos.json");
     //some TODOs to start with
 
     /*
@@ -296,7 +297,7 @@ var main = function() {
             $("main .content").append($content);
             return false;
         });
-    });
+    });;
 
     $(".tabs a:first-child span").trigger("click");
 };
