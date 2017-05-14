@@ -257,11 +257,20 @@ var main = function() {
 																				
 												if (ts.length != 0) {
 														console.log("todo tags entered, " + ts.length);
-														todos.push({
+                            var newTodo = {
 																"description" : d.text,
 																"tags" : ts,
                                 "timed" : datetime.show(datetime.now())
-														});
+														};
+                            //a quick post to our todos route
+                            $.post("todos", newTodo, function (response) {
+                                //this callback is called when the server responds
+                                console.log("We posted and the server responded!");
+                                console.log(response);
+                            });
+
+														todos.push(newTodo);
+
                             $tagInput.val("");
                             $descInput.val("");
 														window.alert("New TODO: \n" + d.text + "(" + ts.join() + ")");
