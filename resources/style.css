@@ -1,187 +1,190 @@
 * {
-		margin : 0;
-		padding : 0;
+		margin           : 0;
+		padding          : 0;
 }
 
 body {
-		background : #f9e933;
-		width : 855px;
-		margin : auto;
+		background       : #f9e933;
+		width            : 855px;
+		margin           : auto;
 }
 
 /* hide the remaining page if width reduced below min value */
 header, main, footer {
-		min-width : 800px;
-		overflow  : auto;
+		min-width        : 800px;
+		overflow         : auto;
 }
 
 header .container, main .container, footer .container {
-		max-width : 855px;
-		margin : auto;
+		max-width        : 855px;
+		margin           : auto;
+    border           : 2px solid salmon;
 }
 
 header {
-		background : white;
+		background       : white;
 }
 
-nav {
-		width : 320px;
-		float : right;
-		margin : 10px;
-}
+
 
 /* remove the default on nav p elements inside */
 nav p {
-		margin : 0;
-		padding : 0;
+		margin           : 0;
+		padding          : 0;
 }
 
 h1 {
-		color						: maroon;
-		text-align			: center;
-		font-family     : 'Source Sans Pro', sans-serif;
+		color            : maroon;
+		text-align       : center;
+		font-family      : 'Source Sans Pro', sans-serif;
 }
 
 p {
-		color						: gray;
+		color            : gray;
 }
 
 p.quote {
-		color						: orange;
-		background			: white;
-		width						: 285px;
-		border					: 1px solid red;
-		padding					: 20px;
+		color            : orange;
+		background       : white;
+		width            : 285px;
+		border           : 1px solid red;
+		padding          : 20px;
 }
 
 div.todo {
-		color						: orange;
-		background			: white;
-		border					: 1px solid red;
-		padding					: 20px;
+		color            : orange;
+		background       : white;
+		border           : 1px solid red;
+		padding          : 20px;
 }
 
 section.todos {
-		color						: orange;
-		background			: white;
-		border					: 1px solid red;
-		padding					: 20px;
+		color            : orange;
+		background       : white;
+		border           : 1px solid red;
+		padding          : 20px;
+}
+nav {
+		border           : 2px solid darksalmon;
+		border-radius    : 10px;
+		background       : beige;
+		width            : 285px;
+    padding          : 10px;
+		margin           : 10px;
+		float            : left;
 }
 nav.quote {
-		color						: orange;
-		background			: white;
-		width						: 285px;
-		border					: 1px solid red;
-		padding					: 20px;
-		float : left;
+		color            : orange;
+		background       : white;
+		width            : 285px;
+		border           : 1px solid red;
+		padding          : 20px;
+		float            : left;
+}
+nav.about {
+		color            : orange;
+		background       : white;
+		width            : 285px;
+		border           : 1px solid red;
+		padding          : 20px;
+		float            : right;
 }
 nav.contact {
-		color						: orange;
-		width						: 285px;
-		float : left;
+		color            : orange;
+		width            : 285px;
+		float            : left;
 }
 
 nav.sitemap {
-		color						: orange;
-		width						: 285px;
-		float : right;
+		color            : orange;
+		width            : 285px;
+		float            : right;
 }
+
 a {
-		color						: cornflowerblue;
+		color            : cornflowerblue;
 }
 
-a:visited {
-		color						: tomato;
+a                    :visited {
+		color            : tomato;
 }
 
-a:hover {
-		text-decoration : underline
+a                    :hover {
+		text-decoration  : underline
 }
 
 ol { /* ordered list */
-		border : 2px solid darksalmon;
-		padding : 2px;
-		background : beige;
+		border           : 1px solid darksalmon;
+		padding          : 24px;
+		background       : beige;
 }
 
 ol li {
-		color : brown;
+		color            : brown;
+}
+
+main .content ol li {
+    width : 855px;
+}
+main .content ol li:nth-child(odd) {
+    background : lavender;
+}
+main .content ol li:nth-child(even) {
+    background : gainsboro;
 }
 
 div.about {
-		border : 10 px solid darksalmon;
-		border-radius : 20px;
-		background : beige;
-		width : 400px;
+		border           : 10px solid darksalmon;
+		border-radius    : 20px;
+		background       : beige;
+		width            : 400px;
 }
 
-nav {
-		border : 10 px solid darksalmon;
-		border-radius : 20px;
-		background : beige;
-		width : 320px;
-		float : right;
-}
+
 ul { /* unordered list */
-		border : 0px solid lightsalmon;
-		border-radius : 0px;
-		background : beige;
+		border           : 1px solid lightsalmon;
+		border-radius    : 1px;
+		background       : beige;
 }
 
 .about li {
-		color : red;
+		color            : red;
 }
 
-footer : {
-		background : gray;
-		clear : both; 
-}
-
-.content li:nth-child(even) {
-		background : lavender;
-}
-.content li:nth-child(odd) {
-		background : gainsboro;
+footer               : {
+		background       : gray;
+		clear            : both; 
 }
 
 .content input {
-		width : 285px;
-		margin : 20px;
-		padding : 10px;
-		border : 5px;
-}
-
-.content input.tags {
-		width : 285px;
-		margin : 20px;
-		padding : 10px;
-		border : 5px;
+		width            : 470px;
+		margin           : 20px;
+		padding          : 10px;
+		border           : 5px;
 }
 
 
 .tabs a span{
-		display : inline-block;
-		border-radius : 5px 5px 0 0;
-		width : 100px;
-		margin-right : 10px;
-		text-align : center;
-		background : #ddd;
-		padding : 5px;
+		display          : inline-block;
+		border-radius    : 5px 5px 0 0;
+		width            : 100px;
+		margin-right     : 10px;
+		text-align       : center;
+		background       : #ddd;
+		padding          : 5px;
 }
 
 .tabs a span.active {
-		background : #eee;
+		background       : #eee;
 }
 
 main .content button{
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    margin: 30px 55px 0px 0px;
-    width: 80px;
-    text-align: center;
-    text-decoration: none;
-    //float: right;
-    //display: inline-block;
-    font-size: 28px;
+    background-color : #4CAF50; /* Green */
+    border           : none;
+    color            : white;
+    margin           : 30px 55px 0px 0px;
+    width            : 80px;
+    text-align       : center;
+    text-decoration  : none;
+    font-size        : 28px;
 }
