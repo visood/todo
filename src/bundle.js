@@ -151,19 +151,8 @@ var main = function() {
     var model    = require("./model.js");
     var datetime = require("./datetime.js");
 
-    //var todos = data.todos;
-    var todos = $.get("/todos.json");
-    //some TODOs to start with
-
-    /*
-    var todosDescriptions = todos.map(function(todo) {
-        return todo.description;
-    });
-
-    var todosTags = fjs.unique(fjs.flatten(todos.map(function(todo) {
-        return todo.tags;
-    })));
-    */
+    var todos = data.todos;
+    //var todos = $.get("/todos.json");
 
     var todosDescriptions   = model.descriptions(todos);
     var todosTags           = model.tags(todos);
@@ -195,52 +184,50 @@ var main = function() {
 	  });
 
 
-    $(".tabs span").toArray().forEach(function (element) {
-        //create a click handler for this element
-        //note that element is a DOM element, use $ to get a jQuery object
-        var $element = $(element);
-
-        $element.on("click", function() {
-            var $content;
-
-            $(".tabs span").removeClass("active");
-            $element.addClass("active");
-            $("main .content").empty();
-
-            if ($element.parent().is(":nth-child(1)")) {
-                console.log("FIRST TAB CLICKED!");
-                $content = $("<ol>");
+    var tabs = [
+        {
+            "name" : "Newest",
+            "content" : function() {
+                var $content =  $("<ol>");
                 todos.reverse().forEach(function (todo) {
                     $content.append($("<li>").text(model.display(todo)))
                 });
-                //model.descriptions(todos.reverse()).forEach(function (todo) {
-                    //$content.append($("<li>").text(todo));
-                //});
                 todos.reverse();
-            } else if ($element.parent().is(":nth-child(2)")) {
-                console.log("SECOND TAB CLICKED!");
-                $content = $("<ol>");
+                return $content;
+            }
+        },
+        {
+            "name" : "Oldest",
+            "content" : function() {
+                var $content = $("<ol>");
                 todos.forEach(function (todo) {
                     $content.append($("<li>").text(model.display(todo)))
                 });
-            } else if ($element.parent().is(":nth-child(3)")) {
-                console.log("TAGs TAB CLICKED");
-                $content = $("<div>").addClass("tagged");
+                return $content;
+            }
+        },
+        {
+            "name" : "Tags",
+            "content" : function() {
+                var $content = $("<div>").addClass("tagged");
                 todosByTag = model.organizedByTags(todos);
-                todosByTag.forEach(function (tagged){
-                    var $taggedName    = $("<h3>").text(tagged.name),
+                todosByTag.forEach(function (tagged) {
+                    var $taggedName = $("<h3>").text(tagged.name),
                         $taggedContent = $("<ol>");
-
-                    tagged.todos.forEach(function (desc) {
+                    tagged.todos.forEach(function(desc) {
                         var $li = $("<li>").text(model.display(desc));
                         $taggedContent.append($li);
                     });
                     $content.append($taggedName);
                     $content.append($taggedContent);
                 });
-            } else if ($element.parent().is(":nth-child(4)")) {
-                console.log("ADD TAB CLICKED!");
 
+                return $content;
+            }
+        },
+        {
+            "name" : "Add",
+            "content" : function() {
                 var $descInput  = $("<input>").addClass("description"),
                     $descLabel  = $("<p>").text("Description"),
                     $tagInput   = $("<input>").addClass("tags"),
@@ -249,7 +236,6 @@ var main = function() {
                     $button     = $("<button>").text("Done");
 
                 $button.on("click", function () {
-                    //var d = io.readDescription($("main .content input.desc").val());
                     var d = io.readDescription($descInput.val());
                     console.log("TODO added " + d);
                     
@@ -285,7 +271,7 @@ var main = function() {
                     }
                 });
 
-                $content = $("<div>")
+                return  $("<div>")
                     .append($descLabel)
                     .append($descInput)
                     .append($tagLabel)
@@ -293,11 +279,27 @@ var main = function() {
                     .append($tagInput)
                     .append($button);
             }
+        }
+    ];
 
-            $("main .content").append($content);
+    tabs.forEach(function (tab) {
+        var $aElem = $("<a>").attr("href", ""),
+            $spanElem = $("<span>").text(tab.name);
+
+        $aElem.append($spanElem);
+
+        $spanElem.on("click", function() {
+
+            $(".tabs a span").removeClass("active");
+            $spanElem.addClass("active");
+            $("main .content").empty();
+
+            $("main .content").append(tab.content());
             return false;
         });
-    });;
+
+        $("main .tabs").append($aElem);
+    });
 
     $(".tabs a:first-child span").trigger("click");
 };
