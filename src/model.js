@@ -40,13 +40,24 @@ var organizedByTags = function(todoObjects) {
     return byTag;
 };
 
-var display = function(todo) {
+var displayTodo = function(todo) {
     return todo.description + "; created at <" + todo.timed + ">";
+};
+var displayDescription = function(todo) {
+    if (todo.tags.length === 0) return "";
+
+    var tags = "(" + todo.tags[0];
+    todo.tags.slice(1).forEach(function(tag) {
+        tags = tags + ", " + tag;
+    });
+    tags = tags + ")";
+    return todo.description + tags + "; created at <" + todo.timed + ">";
 };
 
 module.exports = {
     "descriptions"    : descriptions,
     "tags"            : tags,
     "organizedByTags" : organizedByTags,
-    "display"         : display
+    "displayTodo"         : displayTodo,
+    "displayDescription" : displayDescription
 };

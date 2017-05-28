@@ -1,6 +1,11 @@
 datetime = require("./datetime.js");
 
+//some example data, that may be used to seed the database
+//commented out after db already initialized.
+//TODO: figure out a way to add this data with a script.
+
 var todos = [
+  /*
     {
         "description" : "Get groceries",
         "tags" : ["shopping", "chores"],
@@ -36,6 +41,7 @@ var todos = [
         "tags" : ["improvement", "health"],
         "timed" : datetime.show(datetime.now())
     }
+   */
 ];
 
 module.exports = {

@@ -1,8 +1,8 @@
-var express = require("express"),
-    http = require("http"),
+var express  = require("express"),
+    http     = require("http"),
     mongoose = require("mongoose"),
-    app = express(),
-    todos = [];
+    app      = express(),
+    todos    = [];
       
 
 app.use(express.static(__dirname + "/client"));
@@ -36,6 +36,11 @@ app.get("/goodbye", function (req, res) {
 
 app.get("/todos.json", function (req, res){
     ToDo.find({}, function(err, todos) {
+        if (err !== null)  {
+            console.log("Error finding todos");
+        }
+        console.log("get request found " );
+        console.log(todos);
         res.json(todos);
     });
 });
@@ -46,6 +51,7 @@ app.get("/", function (req, res) {
 });
 
 app.post("/todos", function (req, res) {
+    console.log("server requested to post");
     console.log(req.body);
     var newTodo = new ToDo({
         "description" : req.body.description,

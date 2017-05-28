@@ -1,13 +1,31 @@
-var main = function() {
+var main = function(initialTodos) {
 	  "use strict";
-    var data     = require("./data.js");
     var fjs      = require("./functional.js");
     var io       = require("./io.js");
     var model    = require("./model.js");
     var datetime = require("./datetime.js");
 
-    var todos = data.todos;
-    //var todos = $.get("/todos.json");
+    initialTodos.forEach(function(todo) {
+        $.post("todos", todo, function(response) {
+            console.log("we posted an initial todo!");
+            //console.log(response);
+            console.log("number of records: " + response.length);
+            console.log("for example the first one is");
+            console.log(model.displayTodo(response[0]));
+        });
+    });
+    var todos = [];
+    //var todos = data.todos;
+    $.get("todos.json", function(todoObjects) {
+        console.log("initialized with " + todoObjects.length + " objects");
+        console.log("obtained todos, " + todoObjects.length + " in number");
+        todos = todoObjects;
+    }).fail(function(jqXHR, textStatus, error) {
+        console.log("ERROR: ");
+        console.log(error);
+        return [];
+    });
+
 
     var todosDescriptions   = model.descriptions(todos);
     var todosTags           = model.tags(todos);
@@ -45,7 +63,7 @@ var main = function() {
             "content" : function() {
                 var $content =  $("<ol>");
                 todos.reverse().forEach(function (todo) {
-                    $content.append($("<li>").text(model.display(todo)))
+                    $content.append($("<li>").text(model.displayTodo(todo)))
                 });
                 todos.reverse();
                 return $content;
@@ -56,7 +74,7 @@ var main = function() {
             "content" : function() {
                 var $content = $("<ol>");
                 todos.forEach(function (todo) {
-                    $content.append($("<li>").text(model.display(todo)))
+                    $content.append($("<li>").text(model.displayTodo(todo)))
                 });
                 return $content;
             }
@@ -70,7 +88,7 @@ var main = function() {
                     var $taggedName = $("<h3>").text(tagged.name),
                         $taggedContent = $("<ol>");
                     tagged.todos.forEach(function(desc) {
-                        var $li = $("<li>").text(model.display(desc));
+                        var $li = $("<li>").text(model.displayDescription(desc));
                         $taggedContent.append($li);
                     });
                     $content.append($taggedName);
@@ -156,7 +174,8 @@ var main = function() {
         $("main .tabs").append($aElem);
     });
 
-    $(".tabs a:first-child span").trigger("click");
+    $(".tabs.span Newest").trigger("click");
+    //$(".tabs a:first-child span").trigger("click");
 };
 
 
@@ -170,5 +189,8 @@ $(document).ready(function() {
 });
 */
 $(document).ready(function() {
-    main();
+    var data     = require("./data.js");
+    //post some jsons into the db
+    var initialTodos = data.todos;
+    main(initialTodos);
 });

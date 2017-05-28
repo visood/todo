@@ -1,7 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 datetime = require("./datetime.js");
 
+//some example data, that may be used to seed the database
+//commented out after db already initialized.
+//TODO: figure out a way to add this data with a script.
+
 var todos = [
+  /*
     {
         "description" : "Get groceries",
         "tags" : ["shopping", "chores"],
@@ -37,6 +42,7 @@ var todos = [
         "tags" : ["improvement", "health"],
         "timed" : datetime.show(datetime.now())
     }
+   */
 ];
 
 module.exports = {
@@ -143,16 +149,34 @@ module.exports = {
 };
 
 },{"./functional.js":3}],5:[function(require,module,exports){
-var main = function() {
+var main = function(initialTodos) {
 	  "use strict";
-    var data     = require("./data.js");
     var fjs      = require("./functional.js");
     var io       = require("./io.js");
     var model    = require("./model.js");
     var datetime = require("./datetime.js");
 
-    var todos = data.todos;
-    //var todos = $.get("/todos.json");
+    initialTodos.forEach(function(todo) {
+        $.post("todos", todo, function(response) {
+            console.log("we posted an initial todo!");
+            //console.log(response);
+            console.log("number of records: " + response.length);
+            console.log("for example the first one is");
+            console.log(model.displayTodo(response[0]));
+        });
+    });
+    var todos = [];
+    //var todos = data.todos;
+    $.get("todos.json", function(todoObjects) {
+        console.log("initialized with " + todoObjects.length + " objects");
+        console.log("obtained todos, " + todoObjects.length + " in number");
+        todos = todoObjects;
+    }).fail(function(jqXHR, textStatus, error) {
+        console.log("ERROR: ");
+        console.log(error);
+        return [];
+    });
+
 
     var todosDescriptions   = model.descriptions(todos);
     var todosTags           = model.tags(todos);
@@ -190,7 +214,7 @@ var main = function() {
             "content" : function() {
                 var $content =  $("<ol>");
                 todos.reverse().forEach(function (todo) {
-                    $content.append($("<li>").text(model.display(todo)))
+                    $content.append($("<li>").text(model.displayTodo(todo)))
                 });
                 todos.reverse();
                 return $content;
@@ -201,7 +225,7 @@ var main = function() {
             "content" : function() {
                 var $content = $("<ol>");
                 todos.forEach(function (todo) {
-                    $content.append($("<li>").text(model.display(todo)))
+                    $content.append($("<li>").text(model.displayTodo(todo)))
                 });
                 return $content;
             }
@@ -215,7 +239,7 @@ var main = function() {
                     var $taggedName = $("<h3>").text(tagged.name),
                         $taggedContent = $("<ol>");
                     tagged.todos.forEach(function(desc) {
-                        var $li = $("<li>").text(model.display(desc));
+                        var $li = $("<li>").text(model.displayDescription(desc));
                         $taggedContent.append($li);
                     });
                     $content.append($taggedName);
@@ -301,7 +325,8 @@ var main = function() {
         $("main .tabs").append($aElem);
     });
 
-    $(".tabs a:first-child span").trigger("click");
+    $(".tabs.span Newest").trigger("click");
+    //$(".tabs a:first-child span").trigger("click");
 };
 
 
@@ -315,7 +340,10 @@ $(document).ready(function() {
 });
 */
 $(document).ready(function() {
-    main();
+    var data     = require("./data.js");
+    //post some jsons into the db
+    var initialTodos = data.todos;
+    main(initialTodos);
 });
 
 },{"./data.js":1,"./datetime.js":2,"./functional.js":3,"./io.js":4,"./model.js":6}],6:[function(require,module,exports){
@@ -361,15 +389,26 @@ var organizedByTags = function(todoObjects) {
     return byTag;
 };
 
-var display = function(todo) {
+var displayTodo = function(todo) {
     return todo.description + "; created at <" + todo.timed + ">";
+};
+var displayDescription = function(todo) {
+    if (todo.tags.length === 0) return "";
+
+    var tags = "(" + todo.tags[0];
+    todo.tags.slice(1).forEach(function(tag) {
+        tags = tags + ", " + tag;
+    });
+    tags = tags + ")";
+    return todo.description + tags + "; created at <" + todo.timed + ">";
 };
 
 module.exports = {
     "descriptions"    : descriptions,
     "tags"            : tags,
     "organizedByTags" : organizedByTags,
-    "display"         : display
+    "displayTodo"         : displayTodo,
+    "displayDescription" : displayDescription
 };
 
 },{"./functional.js":3}]},{},[5]);

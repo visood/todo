@@ -1,42 +1,6 @@
 datetime = require("./datetime.js");
 
-var todos = [
-    {
-        "description" : "Get groceries",
-        "tags" : ["shopping", "chores"],
-        "timed" : datetime.show()
-    },
-    {
-        "description" : "Make up some new ToDos",
-        "tags" : ["writing", "work"],
-        "timed" : datetime.show()
-    },
-    {
-        "description" : "Apply for jobs",
-        "tags" : ["work", "job-search"],
-        "timed" : datetime.show()
-    },
-    {
-        "description" : "Review jobs",
-        "tags" : ["learn", "job-search"],
-        "timed" : datetime.show()
-    },
-    {
-        "description" : "read Mining of Massive Datasets",
-        "tags" : ["learn", "work"],
-        "timed" : datetime.show()
-    },
-    {
-        "description" : "Meditate",
-        "tags" : ["learn", "improvement", "health"],
-        "timed" : datetime.show()
-    },
-    {
-        "description" : "Run",
-        "tags" : ["improvement", "health"],
-        "timed" : datetime.show()
-    }
-]
+var todos = [];
 
 modules.exports = {
     "todos" : todos
