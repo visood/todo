@@ -1,0 +1,131 @@
+* {
+		margin : 0;
+		padding : 0;
+}
+
+body {
+		background : #f9e933;
+		width : 855px;
+		margin : auto;
+}
+
+/* hide the remaining page if width reduced below min value */
+header, main, footer {
+		min-width : 800px;
+		overflow  : auto;
+}
+
+header .container, main .container, footer .container {
+		max-width : 855px;
+		margin : auto;
+}
+
+header {
+		background : white;
+}
+
+nav {
+		width : 320px;
+		float : right;
+		margin : 10px;
+}
+
+/* remove the default on nav p elements inside */
+nav p {
+		margin : 0;
+		padding : 0;
+}
+
+h1 {
+		color						: maroon;
+		text-align			: center;
+		font-family     : 'Source Sans Pro', sans-serif;
+}
+
+p {
+		color						: gray;
+}
+
+p.quote {
+		color						: orange;
+		background			: white;
+		width						: 320px;
+		border					: 1px solid red;
+		padding					: 20px;
+}
+
+div.todo {
+		color						: orange;
+		background			: white;
+		border					: 1px solid red;
+		padding					: 20px;
+}
+nav.quote {
+		color						: orange;
+		background			: white;
+		width						: 320;
+		border					: 1px solid red;
+		padding					: 20px;
+		float : left;
+}
+nav.contact {
+		color						: orange;
+		width						: 320px;
+		float : left;
+}
+
+nav.sitemap {
+		color						: orange;
+		width						: 320px;
+		float : right;
+}
+a {
+		color						: cornflowerblue;
+}
+
+a:visited {
+		color						: tomato;
+}
+
+a:hover {
+		text-decoration : underline
+}
+
+ol { /* ordered list */
+		border : 2px solid darksalmon;
+		padding : 2px;
+		background : beige;
+}
+
+ol li {
+		color : brown;
+}
+
+div.about {
+		border : 10 px solid darksalmon;
+		border-radius : 20px;
+		background : beige;
+		width : 400px;
+}
+
+nav {
+		border : 10 px solid darksalmon;
+		border-radius : 20px;
+		background : beige;
+		width : 320px;
+		float : right;
+}
+ul { /* unordered list */
+		border : 0px solid lightsalmon;
+		border-radius : 0px;
+		background : beige;
+}
+
+.about li {
+		color : red;
+}
+
+footer : {
+		background : gray;
+		clear : both; 
+}
