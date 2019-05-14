@@ -39,11 +39,21 @@ class Application @Inject()(
        Future.successful { Ok(views.html.index(dateStr)) }
      */
 
-      val responseF =
+      val sunResponseF =
         ws.url(
           "http://api.sunrise-sunset.org/json?lat=46.5517&lng=6.5586&formatted=0"
         ).get()
-      responseF.map { response =>
+      val weatherResponseF =
+        ws.url(
+          "http://api.openweathermap.org/data/2.5/weather?" +
+            "lat=46.55217&lon=6.5586" +
+            "&units=metric" +
+            "&APPID=da87f848cd1329bf98f8f52b62c511a3"
+        ).get()
+      for {
+        sunResponse <- sunResponseF
+        weatherResponse <- weatherResponseF
+      } yield {
         val formatter =
           DateTimeFormat
             .forPattern(
@@ -51,14 +61,19 @@ class Application @Inject()(
           .withZone(
             DateTimeZone.forID(
               "Europe/Zurich"))
+        val sunInfo =
+          SunInfo(
+            formatter.print(
+              DateTime.parse(
+                (sunResponse.json \ "results" \ "sunrise").as[String])),
+            formatter.print(
+              DateTime.parse(
+                (sunResponse.json \ "results" \ "sunset").as[String])))
+        val temperature =
+          (weatherResponse.json \ "main" \ "temp").as[Double]
         Ok(views.html.index(
-             SunInfo(
-               formatter.print(
-                 DateTime.parse(
-                   (response.json \ "results" \ "sunrise").as[String])),
-               formatter.print(
-                 DateTime.parse(
-                   (response.json \ "results" \ "sunset").as[String])))))
+             sunInfo,
+             temperature))
       }
     }
 }
