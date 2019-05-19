@@ -19,12 +19,10 @@ import service.{SunService, WeatherService}
  * application's home page.
  */
 
-@Singleton
 class Application @Inject()(
-  wsClient: WSClient,
-  cc: ControllerComponents
-) extends AbstractController(cc)
-{
+  sunService: SunService,
+  weatherService: WeatherService
+) extends Controller() {
   /**
    * Create an Action to render an HTML page.
    *
@@ -32,9 +30,6 @@ class Application @Inject()(
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-
-  val sunService = new SunService(wsClient)
-  val weatherService = new WeatherService(wsClient)
   def index() =
     Action.async { implicit request: Request[AnyContent] =>
       /*

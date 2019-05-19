@@ -15,7 +15,9 @@ libraryDependencies ++= Seq(
   ehcache,
   ws,
   guice,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test,
+  "com.softwaremill.macwire" %% "macros" % "2.3.2" % "provided",
+  "com.softwaremill.macwire" %% "util" % "2.3.2"
 )
 
 resolvers += "scalaz.bintray" at "http://dl.bintray.com/scalaz/releases"

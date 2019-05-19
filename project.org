@@ -43,3 +43,14 @@
   - Guice :: Add ~guice~ to ~libraryDependencies~ in ~build.sbt~ to get an
              /application loader/. Otherwise the application does not load!
              
+* Play updates
+  Play framework keeps changing. At the start of the current attempt, I am using
+  the latest Play 2.7.xx.
+** Global state
+   A /Play/ application is configured with /app/conf/application.conf/. The
+   latest configuration sets 
+   ~play.allowGlobalApplication = false~
+   That will complain that ~ global application reference is disabled... ~. A
+   work around is to set the variable to ~true~, however remember that this
+   feature will be deprecated.
+  
