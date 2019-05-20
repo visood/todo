@@ -8,8 +8,12 @@ import com.softwaremill.macwire._
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.mvc.{Filter, EssentialFilter}
 
+import akka.actor.Props
+
 import service.{SunService, WeatherService}
 import filter.{ExampleFilter, StatsFilter}
+import actor.StatsActor
+import actor.StatsActor.Ping
 
 class AppApplicationLoader extends ApplicationLoader
 {
@@ -36,6 +40,11 @@ trait AppComponents
   lazy val statsFilter: Filter = wire[StatsFilter]
   override val httpFilters = Seq(exampleFilter, statsFilter)
 
+  lazy val statsActor =
+    actorSystem.actorOf(
+      Props(wire[StatsActor]),
+      StatsActor.name
+    )
   /*
    Manage application lifecycle.
    "stop hook" will be executed when the application gets a stop signal.
@@ -47,7 +56,8 @@ trait AppComponents
     Logger.info("The app will stop.")
     Future.successful(Unit)}
   val onStart = {
-    Logger.info("The app will start.")}
+    Logger.info("The app will start.")
+    statsActor ! Ping}
 }
 
 
