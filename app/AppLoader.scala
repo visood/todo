@@ -1,3 +1,4 @@
+import scala.concurrent.Future
 import controllers.{Application, AssetsComponents}
 import play.api.ApplicationLoader.Context
 import play.api._
@@ -30,6 +31,20 @@ trait AppComponents
   lazy val sunService = wire[SunService]
   lazy val weatherService = wire[WeatherService]
   lazy val httpFilters = Seq()
+
+  /*
+   Manage application lifecycle.
+   "stop hook" will be executed when the application gets a stop signal.
+   onStart below is a hack. A non-lazy 'val' will be created when a class 
+   extended with this trait is initialized. In the code below, that means the
+   code in the definition of 'onStart' will run...
+   */
+  applicationLifecycle.addStopHook{ () =>
+    Logger.info("The app will stop.")
+    Future.successful(Unit)}
+  val onStart = {
+    Logger.info("The app will start.")}
 }
+
 
 
