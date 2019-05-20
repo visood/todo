@@ -6,8 +6,10 @@ import play.api.routing.Router
 import router.Routes
 import com.softwaremill.macwire._
 import play.api.libs.ws.ahc.AhcWSComponents
+import play.api.mvc.{Filter, EssentialFilter}
 
 import service.{SunService, WeatherService}
+import filter.{ExampleFilter, StatsFilter}
 
 class AppApplicationLoader extends ApplicationLoader
 {
@@ -30,7 +32,9 @@ trait AppComponents
   lazy val applicationController = wire[Application]
   lazy val sunService = wire[SunService]
   lazy val weatherService = wire[WeatherService]
-  lazy val httpFilters = Seq()
+  lazy val exampleFilter: EssentialFilter = wire[ExampleFilter]
+  lazy val statsFilter: Filter = wire[StatsFilter]
+  override val httpFilters = Seq(exampleFilter, statsFilter)
 
   /*
    Manage application lifecycle.
