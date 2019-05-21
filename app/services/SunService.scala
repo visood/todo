@@ -7,7 +7,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import org.joda.time.{DateTimeZone, DateTime}
 import org.joda.time.format.DateTimeFormat
 
-import model.SunInfo
+import model.{SunInfo, Location}
 
 class SunService(wsClient: WSClient) {
 
@@ -15,10 +15,14 @@ class SunService(wsClient: WSClient) {
     "http://api.sunrise-sunset.org/json?" + 
       s"lat=$latitude&lng=$longitude&formatted=0"
 
-  def getSunInfo(latitude: Double, longitude: Double ): Future[SunInfo] =
+  def getSunInfo(
+    location: Location
+  ): Future[SunInfo] =
     wsClient
       .url(
-        queryURL(latitude, longitude))
+        queryURL(
+          location.latitude,
+          location.longitude))
       .get()
       .map {response =>
         val json =
@@ -32,7 +36,7 @@ class SunService(wsClient: WSClient) {
         val formatter =
           DateTimeFormat
             .forPattern("HH:mm:ss")
-            .withZone(DateTimeZone.forID("Europe/Zurich"))
+            .withZone(DateTimeZone.forID(Location.zoneID(location)))
         SunInfo(
           formatter.print(sunriseTime),
           formatter.print(sunsetTime))

@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit
 
 import service.{SunService, WeatherService}
 import actor.StatsActor
+import model.Location
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -51,11 +52,15 @@ class Application @Inject()(
         actorSystem.actorSelection(StatsActor.path) ? StatsActor.GetStats
       ).mapTo[Int]
 
-      val latitude = 46.5517
-      val longitude = 6.5586
+      val location =
+        Location(
+          city = "Zurich",
+          zone = "Europe",
+          latitude = 46.5517,
+          longitude = 6.5586)
       for {
-        sunInfo     <- sunService.getSunInfo(latitude, longitude)
-        temperature <- weatherService.getTemperature(latitude, longitude)
+        sunInfo     <- sunService.getSunInfo(location)
+        temperature <- weatherService.getTemperature(location)
         requests <- requestsF
       } yield {
         Ok(views.html.index(sunInfo, temperature, requests))

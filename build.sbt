@@ -17,7 +17,8 @@ libraryDependencies ++= Seq(
   guice,
   "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test,
   "com.softwaremill.macwire" %% "macros" % "2.3.2" % "provided",
-  "com.softwaremill.macwire" %% "util" % "2.3.2"
+  "com.softwaremill.macwire" %% "util" % "2.3.2",
+  "org.mockito" % "mockito-core" % "2.25.0" % "test"
 )
 
 resolvers += "scalaz.bintray" at "http://dl.bintray.com/scalaz/releases"
