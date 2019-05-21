@@ -63,7 +63,11 @@ class Application @Inject()(
         temperature <- weatherService.getTemperature(location)
         requests <- requestsF
       } yield {
-        Ok(views.html.index(sunInfo, temperature, requests))
+        Ok(views.html.index(
+             location,
+             sunInfo,
+             temperature,
+             requests))
       }
     }
 }
