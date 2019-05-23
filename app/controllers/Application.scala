@@ -5,6 +5,7 @@ import play.api._
 import play.api.mvc._
 import play.api.libs.ws._
 import play.api.Play.current
+import play.api.libs.json.Json
 //import java.util.Date
 import java.text.SimpleDateFormat
 import scala.concurrent.Future
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit
 
 import service.{SunService, WeatherService}
 import actor.StatsActor
-import model.Location
+import model.{Location, CombinedData}
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -38,8 +39,11 @@ class Application @Inject()(
    * The configuration in the `routes` file means that this method
    * will be called when the application receives a `GET` request with
    * a path of `/`.
-   */
-  def index() =
+    */
+  def index = Action {
+    Ok(views.html.index())
+  }
+  def data =
     Action.async { implicit request: Request[AnyContent] =>
       /*
        val date = new Date()
@@ -63,11 +67,15 @@ class Application @Inject()(
         temperature <- weatherService.getTemperature(location)
         requests <- requestsF
       } yield {
-        Ok(views.html.index(
-             location,
-             sunInfo,
-             temperature,
-             requests))
+        Ok(
+          Json.toJson(
+            CombinedData(
+              sunInfo,
+              temperature,
+              requests
+            )
+          )
+        )
       }
     }
 }

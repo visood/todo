@@ -1,1 +1,85 @@
+#+TITLE: An Interactive Web based "TODO" list.
+#+TODO: TODO(t) SCHEDULED(@/!) WAIT(w@/!) INPROGRESS(p@/!) DELEGATED(l@) | CANCELED(c!) DONE(d@/!)
+
+* Introduction
+  I started learning from Semmy Purewel's  /Learning Web App Development/ a
+  while ago,  by now have forgotten the details. I will restart learning from
+  the book again, and write a web based TODO list.
+
+* What TODO
+
+** Review book up to chapter 4. 
+   SCHEDULED <2017-05-09 Di>
+   CANCELLED <2019-05-12 So>
+   It has been too long. Now we have other plans
+
+* Log
+  To follow the development of a project I will have to record when I have
+  developed its various parts. These will be saved in the section Log. It makes
+  sense for this section to be towards the top, after the *TODO* section.
+  
+* <2019-05-12 So>
+  Start over to use Scala on the back-end and React on the front-end.
+  
+
+
+
+* Giter8
+  [[http://www.foundweekends.org/giter8/][Giter8]] is a command line tool to generate files and directories form templates 
+  published on Github or any other git repository. Implemented in Scala and run 
+  through the ~sbt launcher~, it can produce output for any purpose.
+
+** Conscript
+   Some scripts to install stuff from Github. ~Giter8~ was installed using
+   [[http://www.foundweekends.org/giter8/setup.html][~Conscript~]].
+
+   
+* Server related
+  - Kill server :: If ~localhost:9000~ is occupied, check the ~PID~ using
+  #+begin_src
+  lsof -i:9000
+  #+end_src
+  and ~kill <PID>~
+  - Guice :: Add ~guice~ to ~libraryDependencies~ in ~build.sbt~ to get an
+             /application loader/. Otherwise the application does not load!
+             
+* Play updates
+  Play framework keeps changing. At the start of the current attempt, I am using
+  the latest Play 2.7.xx.
+** Global state
+   A /Play/ application is configured with /app/conf/application.conf/. The
+   latest configuration sets 
+   ~play.allowGlobalApplication = false~
+   That will complain that ~ global application reference is disabled... ~. A
+   work around is to set the variable to ~true~, however remember that this
+   feature will be deprecated.
+* Frontend  
+  We will use React for the front-end. That means we will use ~NPM~!
+** NPM  
+   We include what we learned when learning ~React~.
+   1. install node
+   2. in the project directory: ~npm init~
+   3. install React Dependencies: ~npm install react react-dom --save~
+   4. install webpack: ~npm install webpack --save~
+   5. configure webpack in ~webpack.config.js~ at project root
+   6. install babel
+      ~npm install babel-loader babel-preset-es2015 babel-preset-react --save~
+      Things keep changing, as of babel 7
+      ~npm install @babel/core @babel/preset-env --save-dev ~
+   7. modify ~package.json~ to configure Babel
+   8. tell webpack about Babel --- by adding ~module~ entry to ~webpack.config.js~
+   9. build: ~./node_modules/.bin/webpack~
+** Bug fixing
+   You will need to fix for constant API changes.
+   1. React has changed 
+      #+begin_src
+      npm install create-react-class --save~
+      var createReactClass = require("create-react-class");
+      #+end_src
+   2. instead of React.createClass({..., you'll have createReactClass({....
+* Testing
+  We will use ~ScalaTest~ for testing...
+  We also need a library to mock classes. The  book we are following, Modern Web
+  Development with Scala, uses a java library called ~Mockito~. At this moment
+  there are Scala versions of this library discussed in
   [[https://medium.com/@bruno.bonanno/introduction-to-mockito-scala-ede30769cbda][Medium Article]].
