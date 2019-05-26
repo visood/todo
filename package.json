@@ -23,15 +23,20 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^2.1.1",
     "exports-loader": "^0.7.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "imports-loader": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "axis": "^1.0.0",
+    "concise.css": "^4.1.2",
     "create-react-class": "^15.6.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

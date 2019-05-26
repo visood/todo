@@ -27,41 +27,40 @@ var SunWeatherComponent =
       },
       render: function() {
         return (
-          <div>
-            <div>Sunrise time: {this.state.sunrise}</div>
-            <div>Sunset time: {this.state.sunset}</div>
-            <div>Current temperature: {this.state.temperature}</div>
-            <div>Number requests: {this.state.requests}</div>
-          </div>);
-      }
+          <table>
+            <tbody>
+              <tr>
+                <td>Sunrise time</td>
+                <td>{this.state.sunrise}</td>
+              </tr>
+              <tr>
+                <td>Sunset time</td>
+                <td>{this.state.sunset}</td>
+              </tr>
+              <tr>
+                <td>Current temperature</td>
+                <td>{this.state.temperature}</td>
+              </tr>
+              <tr>
+                <td>Number requests</td>
+                <td>{this.state.requests}</td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      },
     });
 
   /*
-  componentDidMount = () => ;
-  render = () => {
+    render: function() {
     return (
-      <table>
-        <tbody>
-          <tr>
-            <td>Sunrise time</td>
-            <td>{this.state.sunrise}</td>
-          </tr>
-          <tr>
-            <td>Sunset time</td>
-            <td>{this.state.sunset}</td>
-          </tr>
-          <tr>
-            <td>Current temperature</td>
-            <td>{this.state.temperature}</td>
-          </tr>
-          <tr>
-            <td>Number of requests </td>
-            <td>{this.state.requests}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  }
+    <div>
+    <div>Sunrise time: {this.state.sunrise}</div>
+    <div>Sunset time: {this.state.sunset}</div>
+    <div>Current temperature: {this.state.temperature}</div>
+    <div>Number requests: {this.state.requests}</div>
+    </div>);
+    }
   */
 
 export default SunWeatherComponent;
